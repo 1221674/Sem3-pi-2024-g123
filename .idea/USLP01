@@ -1,0 +1,76 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+hide circle
+hide methods
+title Domain Model
+
+class Facility {
+}
+
+class PlantFloor {
+}
+
+class Station {
+}
+
+class Layout {
+}
+
+class BOO {
+}
+
+class BOM {
+}
+
+class Product {
+}
+
+class Component {
+}
+
+class RawMaterial {
+}
+
+class ProductEngineering {
+}
+
+class ProductOrder {
+}
+
+class ProductionPlan {
+}
+
+class PlanningModule {
+}
+
+class User {
+}
+
+class Order {
+}
+
+entity Customer {
+}
+
+' Relationships with cardinality
+
+Product "*" --> "1" BOM : has
+Product "*" --> "1" BOO : follows
+Product "*" --> "1" ProductionPlan : follows
+Product "*" --> "1" ProductEngineering : follows
+BOM "1" --> "*" Component : contains
+BOM "1" --> "*" RawMaterial : contains
+ProductionPlan "*" --> "1" AgendaEntry : includes
+ProductionPlan "*" --> "1" PlantFloor : uses
+PlantFloor "*" --> "1" Facility : contains
+PlantFloor "*" --> "1" Station : includes
+PlanningModule "*" --> "1" ProductionPlan : defines
+User "1" --> "*" Order : places
+Order "1" --> "*" ProductOrder : contains
+Order "*" --> "1" Customer : placed by
+ProductOrder "*" --> "1" Customer : for
+
+@enduml
