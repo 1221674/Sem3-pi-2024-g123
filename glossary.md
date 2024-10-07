@@ -1,13 +1,14 @@
 # Glossary/Data Dictionary
 
-| **_Entity_** | **_Attribute_**        | **_Data Type_** | **_Description_**                                     | **_Constraints_** |                                       
-|:-------------|------------------------|-----------------|-------------------------------------------------------|:------------------|
-| **Product**  | product_id             | INTEGER         | Unique identifier for the product                     | Primary Key       |
-|              | product_name           | VARCHAR(255)    | Name of the product                                   |                   |
-|              | BOM(Bill of Materials) | VARCHAR(255)    | Listing the components of the product                 |                   |
-|              | production_time        | FLOAT           | Time (in hours) needed to produce this product        |                   |
-|              | variant                | VARCHAR(255)    | Specific variant of the product (e.g., size, color)   |                   |
-|              | category               | VARCHAR(255)    | Category of the product (e.g., furniture, metalwork)  |                   |
+| **_Entity_** | **_Attribute_**        | **_Data Type_** | **_Description_**                                    | **_Constraints_**      |                                       
+|:-------------|------------------------|-----------------|------------------------------------------------------|:-----------------------|
+| **Product**  | product_id             | INTEGER         | Unique identifier for the product                    | Primary Key            |
+|              | order_id               | INTEGER         | Unique identifier for the order                      | Foreign Key from Order |
+|              | product_name           | VARCHAR(255)    | Name of the product                                  |                        |
+|              | BOM(Bill of Materials) | VARCHAR(255)    | Listing the components of the product                |                        |
+|              | production_time        | FLOAT           | Time (in hours) needed to produce this product       |                        |
+|              | variant                | VARCHAR(255)    | Specific variant of the product (e.g., size, color)  |                        |
+|              | category               | VARCHAR(255)    | Category of the product (e.g., furniture, metalwork) |                        |
 
 
 
@@ -55,19 +56,31 @@
 
 | **_Entity_** | **_Attribute_** | **_Data Type_** | **_Description_**                                 | **_Constraints_**        |                                       
 |:-------------|-----------------|-----------------|---------------------------------------------------|:-------------------------|
-| **Machine**  | machine_id      | INTEGER         | Unique identifier for the customer                | Primary Key              |
+| **Machine**  | machine_id      | INTEGER         | Unique identifier for the machine                 | Primary Key              |
 |              | machine_name    | VARCHAR(255)    | Name of the machine                               |                          |
-|              | operation_type  | VARCHAR(255)    | Tax identification number (NIF) of the customer   |                          |
-|              | processing_time | FLOAT           | Time (in hours) to complete an operation          |                          |
 |              | machine_status  | VARCHAR(255)    | Status of the machine (e.g., Active, Maintenance) |                          |
 
 
 
 
-| **_Entity_**  | **_Attribute_** | **_Data Type_** | **_Description_**                                 | **_Constraints_**        |                                       
-|:--------------|-----------------|-----------------|---------------------------------------------------|:-------------------------|
-| **Operation** | machine_id      | INTEGER         | Unique identifier for the customer                | Primary Key              |
-|               | machine_name    | VARCHAR(255)    | Name of the machine                               |                          |
-|               | operation_type  | VARCHAR(255)    | Tax identification number (NIF) of the customer   |                          |
-|               | processing_time | FLOAT           | Time (in hours) to complete an operation          |                          |
-|               | machine_status  | VARCHAR(255)    | Status of the machine (e.g., Active, Maintenance) |                          |
+| **_Entity_**  | **_Attribute_**    | **_Data Type_** | **_Description_**                                     | **_Constraints_**        |                                       
+|:--------------|--------------------|-----------------|-------------------------------------------------------|:-------------------------|
+| **Operation** | operation_id       | INTEGER         | Unique identifier for the operation                   | Primary Key              |
+|               | machine_id         | INTEGER         | ID of the machine performing the operation            | Foreign Key from Machine |
+|               | product_id         | INTEGER         | ID of the product being processed by this operation   | Foreign key from Product |
+|               | operation_type     | VARCHAR(255)    | Type of operation performed                           |                          |
+|               | operation_name     | VARCHAR(255)    | Name of the operation                                 |                          |
+|               | operation_sequence | INTEGER         | Order in which this operation should be performed     |                          |
+|               | time_required      | FLOAT           | Time required to complete this operation(in hours???) |                          |
+
+
+
+
+| **_Entity_** | **_Attribute_**    | **_Data Type_** | **_Description_**                                     | **_Constraints_** |                                       
+|:-------------|--------------------|-----------------|-------------------------------------------------------|:------------------|
+| **Material** | material_id        | INTEGER         | Unique identifier for the material                    | Primary Key       |
+|              | material_name      | VARCHAR(255)    | Name of the material                                  |                   |
+|              | material_details   | VARCHAR(255)    | Details of the material                               |                   |
+|              | quantity_available | INTEGER         | Available quantity of a material in stock             |                   |
+|              | reorder_threshold  | INTEGER         | Minimum stock quantity before reordering is triggered |                   |
+
