@@ -1,14 +1,15 @@
 # Data Dictionary
 
-| **_Entity_** | **_Attribute_**        | **_Data Type_** | **_Description_**                                    | **_Constraints_**      |                                       
-|:-------------|------------------------|-----------------|------------------------------------------------------|:-----------------------|
-| **Product**  | product_id             | INTEGER         | Unique identifier for the product                    | Primary Key            |
-|              | order_id               | INTEGER         | Unique identifier for the order                      | Foreign Key from Order |
-|              | product_name           | VARCHAR(255)    | Name of the product                                  |                        |
-|              | BOM(Bill of Materials) | VARCHAR(255)    | Listing the components of the product                |                        |
-|              | production_time        | FLOAT           | Time (in hours) needed to produce this product       |                        |
-|              | variant                | VARCHAR(255)    | Specific variant of the product (e.g., size, color)  |                        |
-|              | category               | VARCHAR(255)    | Category of the product (e.g., furniture, metalwork) |                        |
+| **_Entity_** | **_Attribute_**        | **_Data Type_** | **_Description_**                                                                                                      | **_Constraints_**      |                                       
+|:-------------|------------------------|-----------------|------------------------------------------------------------------------------------------------------------------------|:-----------------------|
+| **Product**  | product_id             | INTEGER         | Unique identifier for the product                                                                                      | Primary Key            |
+|              | order_id               | INTEGER         | Unique identifier for the order                                                                                        | Foreign Key from Order |
+|              | product_name           | VARCHAR(255)    | Name of the product                                                                                                    |                        |
+|              | BOM(Bill of Materials) | VARCHAR(255)    | Listing the components of the product                                                                                  |                        |
+|              | BOO(Bill of Operations | VARCHAR(255)    | List of the operations a product is subjected to with one or more possible sequences throughout its production process |                        |
+|              | production_time        | FLOAT           | Time (in hours) needed to produce this product                                                                         |                        |
+|              | variant                | VARCHAR(255)    | Specific variant of the product (e.g., size, color)                                                                    |                        |
+|              | category               | VARCHAR(255)    | Category of the product (e.g., furniture, metalwork)                                                                   |                        |
 
 
 
@@ -57,7 +58,9 @@
 | **_Entity_** | **_Attribute_** | **_Data Type_** | **_Description_**                                 | **_Constraints_**        |                                       
 |:-------------|-----------------|-----------------|---------------------------------------------------|:-------------------------|
 | **Machine**  | machine_id      | INTEGER         | Unique identifier for the machine                 | Primary Key              |
+|              | facility_id     | INTEGER         | Unique identifier for the facility                |                          |
 |              | machine_name    | VARCHAR(255)    | Name of the machine                               |                          |
+|              | machine_type    | VARCHAR(255)    | Type of machine                                   |                          |
 |              | machine_status  | VARCHAR(255)    | Status of the machine (e.g., Active, Maintenance) |                          |
 
 
@@ -83,4 +86,15 @@
 |              | material_details   | VARCHAR(255)    | Details of the material                               |                   |
 |              | quantity_available | INTEGER         | Available quantity of a material in stock             |                   |
 |              | reorder_threshold  | INTEGER         | Minimum stock quantity before reordering is triggered |                   |
+
+
+
+
+| **_Entity_** | **_Attribute_**   | **_Data Type_** | **_Description_**                                     | **_Constraints_** |                                       
+|:-------------|-------------------|-----------------|-------------------------------------------------------|:------------------|
+| **Facility** | facility_id       | INTEGER         | Unique identifier for the facility                    | Primary Key       |
+|              | facility_name     | VARCHAR(255)    | Name of the facility                                  |                   |
+|              | facility_type     | VARCHAR(255)    | Type of Facility                                      |                   |
+|              | facility_address  | VARCHAR(255)    | Address of the customer                               |                   |
+|              | reorder_threshold | INTEGER         | Minimum stock quantity before reordering is triggered |                   |
 
